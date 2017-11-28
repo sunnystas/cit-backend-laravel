@@ -8,6 +8,17 @@ use App\Http\Controllers\Controller;
 
 class CommonDataController extends Controller
 {
+    public function getCityInfo()
+    {
+        return response()->json([
+            "cityInfo" => [
+                "name" => "City Name",
+                "lat" => "47.884309",
+                "lng" => "33.385954",
+                "picUri" => "http://dnipro.cityonline.com.ua/media/dnipro.cityonline.com.ua/img/gerb.png",
+            ]
+        ]);
+    }
     public function getStreets()
     {
         return response()->json([

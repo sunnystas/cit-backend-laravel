@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use App\User;
+use App\Http\Models\User;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {

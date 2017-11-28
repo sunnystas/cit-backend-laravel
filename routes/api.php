@@ -13,10 +13,22 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+// Route::middleware('auth:api')->get('/users', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::prefix('v1')->group(function () {
+    Route::prefix('common')->group(function () {
+        Route::get('streets', 'Api\v1\CommonDataController@getStreets');
+        Route::get('categories', 'Api\v1\CommonDataController@getCategories');
+    });
 });
 
 Route::group(['middleware' => 'auth.basic'], function () {
-    Route::get('/api/users', 'UserController@index');
+
 });
+

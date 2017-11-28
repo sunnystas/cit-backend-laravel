@@ -1,6 +1,6 @@
 {
-    "name": "tony133/laravel-api-rest",
-    "description": "Simple example of a REST API with Laravel 5.5 LTS",
+    "name": "sunnystas/cit-back-laravel",
+    "description": "CityOnline back-end server app on Laravel",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",

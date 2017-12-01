@@ -10,6 +10,7 @@ class CommonDataController extends Controller
 {
     public function getCityInfo()
     {
+        // @todo detect city by sub-domain, active lang and extract localized city data
         return response()->json([
             "cityInfo" => [
                 "name" => "City Name",

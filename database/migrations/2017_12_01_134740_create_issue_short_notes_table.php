@@ -15,7 +15,7 @@ class CreateIssueShortNotesTable extends Migration
     {
         Schema::create('issue_short_notes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('note');
+            $table->string('note')->index();
             $table->integer('issue_id')->unsigned();
 
             $table->foreign('issue_id')->references('id')->on('issues');

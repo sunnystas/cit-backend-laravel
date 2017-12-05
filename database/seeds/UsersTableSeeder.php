@@ -12,12 +12,23 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-		User::create(array(
-            'name' => 'stan',
-            'username' => 'stan_admin',
-			'password' => Hash::make('admin'),
-            'email' => 'sunnystas@gmail.com'
-        ));
-
+		User::insert([
+            [
+                'username' => 'stan city dispatcher',
+                'first_name' => 'Stan',
+                'last_name' => 'Test',
+                'email' => 'sunnystas@gmail.com',
+                'password' => Hash::make('admin'),
+                'role_id' => '1',
+            ],
+            [
+                'username' => 'stan_company_dispatcher',
+                'first_name' => 'Stan',
+                'last_name' => 'Test',
+                'email' => 'sunnystas2@gmail.com',
+                'password' => Hash::make('admin'),
+                'role_id' => '2',
+            ],
+        ]);
     }
 }

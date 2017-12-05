@@ -15,7 +15,7 @@ class CreateUtilityServiceEmployeesTable extends Migration
     {
         Schema::create('utility_service_employees', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->index();
             $table->integer('utility_service_id')->unsigned();
             
             $table->foreign('utility_service_id')->references('id')->on('utility_services');

@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Api\v1;
 use Illuminate\Routing\ResponseFactory;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use App\Http\Controllers\Controller;
+use App\Http\Models\IssueCategory;
 
 class CommonDataController extends Controller
 {
-    public function getCityInfo()
-    {
-        // @todo detect city by sub-domain, active lang and extract localized city data
+    public function getCityInfo() {
+        // @todo extract city ID and active lang from the session, and extract localized city data
         return response()->json([
             "cityInfo" => [
                 "name" => "City Name",
@@ -20,8 +20,8 @@ class CommonDataController extends Controller
             ]
         ]);
     }
-    public function getStreets()
-    {
+
+    public function getStreets() {
         return response()->json([
             "streets" => [
                 [
@@ -47,79 +47,35 @@ class CommonDataController extends Controller
             ]
         ]);
     }
-    public function getCategories()
-    {
-        return response()->json([
-            [
-                "id" => 1,
-                "name" => "categ1", 
-                "subCategories" => [
-                    [
-                        "id" => 10,
-                        "name" => "subCateg1"
-                    ],
-                    [
-                        "id" => 11,
-                        "name" => "subCateg2"
-                    ]
-                ],
-            ],
-            [
-                "id" => 2, 
-                "name" => "categ2", 
-                "subCategories" => [
-                    [
-                        "id" => 13,
-                        "name" => "subCateg1"
-                    ],
-                    [
-                        "id" => 15,
-                        "name" => "subCateg2"
-                    ]
-                ],
-            ],
-            [
-                "id" => 3, 
-                "name" => "categ3", 
-                "subCategories" => [
-                    [
-                        "id" => 16,
-                        "name" => "subCateg1"
-                    ],
-                    [
-                        "id" => 18,
-                        "name" => "subCateg2"
-                    ]
-                ],
-            ],
-            [
-                "id" => 4, 
-                "name" => "categ4", 
-                "subCategories" => [
-                    [
-                        "id" => 21,
-                        "name" => "subCateg1"
-                    ],
-                    [
-                        "id" => 22,
-                        "name" => "subCateg2"
-                    ]
-                ],
-            ],
-            [
-                "id" => 5, 
-                "name" => "categ5", 
-                "subCategories" => [
-                    [
-                        "id" => 24,
-                        "name" => "subCateg1"
-                    ],
-                    [
-                        "id" => 54,
-                        "name" => "subCateg2"
-                    ]
-                ],
-            ],
-        ]);
+
+    public function getIssueCategories() {
+        $lang = 'ua';
+        $resultArr = [];
+        $issueCategories = IssueCategory::select('*', 'name_' . $lang . ' as name')->get();
+        foreach ($issueCategories as $k => $ic) {
+            $arr = [];
+            foreach ($issueCategories as $j => $icInner) {
+                if ($icInner->parent_id == $ic->id) {
+                    $arr[] = $icInner;
+                    unset($issueCategories[$j]);
+                }
+                unset($ic->parent_id);
+            }
+            if (count($arr) > 0) {
+                $ic->subCategories = $arr;
+            }
+            $resultArr[] = $ic;
+        }
+        
+        return response()->json($issueCategories);
     }
+
+    public function getIssueStatuses() {
+        return response()->json([]);
+    }
+
+    public function getIssuePriorities() {
+        return response()->json([]);
+    }
+
 }

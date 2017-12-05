@@ -16,7 +16,7 @@ class CreateStreetsTable extends Migration
         Schema::create('streets', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('city_id')->unsigned();
-            $table->string('name_ua');
+            $table->string('name_ua')->index();
             $table->string('name_ru')->nullable();
             $table->string('name_uk')->nullable();
 

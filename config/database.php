@@ -87,6 +87,7 @@ return [
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
+            'collation' => 'utf8_general_ci',
             'prefix' => '',
             'schema' => 'public',
             'sslmode' => 'prefer',

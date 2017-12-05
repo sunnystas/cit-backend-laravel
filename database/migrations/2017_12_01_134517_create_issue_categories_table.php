@@ -15,10 +15,10 @@ class CreateIssueCategoriesTable extends Migration
     {
         Schema::create('issue_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name_ua');
-            $table->string('name_ru')->nullable();
-            $table->string('name_uk')->nullable();
-            $table->integer('parent_id')->unsigned();
+            $table->text('name_ua')->index();
+            $table->text('name_ru')->nullable();
+            $table->text('name_uk')->nullable();
+            $table->integer('parent_id')->unsigned()->nullable();
 
             $table->foreign('parent_id')->references('id')->on('issue_categories');
         });

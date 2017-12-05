@@ -6,6 +6,8 @@ use Illuminate\Routing\ResponseFactory;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use App\Http\Controllers\Controller;
 use App\Http\Models\IssueCategory;
+use App\Http\Models\IssueStatus;
+use App\Http\Models\IssuePriority;
 
 class CommonDataController extends Controller
 {
@@ -71,11 +73,15 @@ class CommonDataController extends Controller
     }
 
     public function getIssueStatuses() {
-        return response()->json([]);
+        $lang = 'ua';
+        $issueStatuses = IssueStatus::select('*', 'name_' . $lang . ' as name')->get();
+        return response()->json($issueStatuses);
     }
 
     public function getIssuePriorities() {
-        return response()->json([]);
+        $lang = 'ua';
+        $issuePriorities = IssuePriority::select('*', 'name_' . $lang . ' as name')->get();
+        return response()->json($issuePriorities);
     }
 
 }

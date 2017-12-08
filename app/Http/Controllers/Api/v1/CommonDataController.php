@@ -14,23 +14,11 @@ use App\Http\Models\Street;
 
 class CommonDataController extends Controller
 {
-    public function getCityInfo() {
-        // @todo extract city ID and active lang from the session, and extract localized city data
-        return response()->json([
-            "cityInfo" => [
-                "name" => "City Name",
-                "lat" => "47.884309",
-                "lng" => "33.385954",
-                "picUri" => "http://dnipro.cityonline.com.ua/media/dnipro.cityonline.com.ua/img/gerb.png",
-            ]
-        ]);
-    }
-
     public function getCities(Request $request) {
         $lang = 'ua';
-        $cities = City::select('*', 'name_' . $lang . ' as name')->whereNotNull('lat')->whereNotNull('lng')->get();
+        $cities = City::select('*', 'name_' . $lang . ' as name', 'pic_uri as picUri')->whereNotNull('lat')->whereNotNull('lng')->get();
         foreach ($cities as $city) {
-            $city->pic_uri = $request->getSchemeAndHttpHost() . '/storage/' . $city->pic_uri;
+            $city->picUri = $request->getSchemeAndHttpHost() . '/storage/' . $city->picUri;
         }
         return response()->json($cities);
     }

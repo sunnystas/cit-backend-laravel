@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api\v1;
 use Illuminate\Routing\ResponseFactory;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Models\IssueCategory;
 use App\Http\Models\IssueStatus;
 use App\Http\Models\IssuePriority;
+use App\Http\Models\City;
+use App\Http\Models\Street;
 
 class CommonDataController extends Controller
 {
@@ -23,30 +26,20 @@ class CommonDataController extends Controller
         ]);
     }
 
-    public function getStreets() {
+    public function getCities(Request $request) {
+        $lang = 'ua';
+        $cities = City::select('*', 'name_' . $lang . ' as name')->whereNotNull('lat')->whereNotNull('lng')->get();
+        foreach ($cities as $city) {
+            $city->pic_uri = $request->getSchemeAndHttpHost() . '/storage/' . $city->pic_uri;
+        }
+        return response()->json($cities);
+    }
+        
+    public function getStreets(Request $request, $city_id) {
+        $lang = 'ua';
+        $streets = Street::select('*', 'name_' . $lang . ' as name')->where('city_id', $city_id)->get();
         return response()->json([
-            "streets" => [
-                [
-                    "id" => 1, 
-                    "name" => "test1"
-                ],
-                [
-                    "id" => 2, 
-                    "name" => "test2"
-                ],
-                [
-                    "id" => 3, 
-                    "name" => "test3"
-                ],
-                [
-                    "id" => 4, 
-                    "name" => "test4"
-                ],
-                [
-                    "id" => 5, 
-                    "name" => "test5"
-                ],
-            ]
+            'streets' => $streets
         ]);
     }
 

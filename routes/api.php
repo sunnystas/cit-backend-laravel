@@ -24,7 +24,8 @@ use Illuminate\Http\Request;
 Route::prefix('v1')->group(function () {
     Route::prefix('common')->group(function () {
         Route::get('city-info', 'Api\v1\CommonDataController@getCityInfo');
-        Route::get('streets', 'Api\v1\CommonDataController@getStreets');
+        Route::get('cities', 'Api\v1\CommonDataController@getCities');
+        Route::get('streets/{city_id}', 'Api\v1\CommonDataController@getStreets');
         Route::get('categories', 'Api\v1\CommonDataController@getIssueCategories');
         Route::get('statuses', 'Api\v1\CommonDataController@getIssueStatuses');
         Route::get('priorities', 'Api\v1\CommonDataController@getIssuePriorities');

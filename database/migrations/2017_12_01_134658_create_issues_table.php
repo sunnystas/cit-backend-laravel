@@ -16,9 +16,11 @@ class CreateIssuesTable extends Migration
         Schema::create('issues', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('notify_about_changes')->nullable();
+            $table->integer('home_city_id')->unsigned();
             $table->integer('home_street_id')->unsigned();
             $table->string('home_building_no');
             $table->string('home_flat_no')->nullable();
+            $table->integer('issue_city_id')->unsigned();
             $table->integer('issue_street_id')->unsigned();
             $table->string('issue_building_no');
             $table->string('issue_flat_no')->nullable();
@@ -27,6 +29,7 @@ class CreateIssuesTable extends Migration
             $table->integer('utility_service_employee_id')->unsigned();
             $table->integer('priority_id')->unsigned();
             $table->integer('status_id')->unsigned();
+            $table->text('short_notes')->nullable();
             $table->text('notes')->nullable();
             $table->json('pictures')->nullable();
             $table->date('expected_end_date')->nullable();

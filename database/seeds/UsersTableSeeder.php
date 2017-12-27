@@ -14,7 +14,6 @@ class UsersTableSeeder extends Seeder
     {
 		User::insert([
             [
-                'username' => 'stan city dispatcher',
                 'first_name' => 'Stan',
                 'last_name' => 'Test',
                 'email' => 'sunnystas@gmail.com',
@@ -22,7 +21,6 @@ class UsersTableSeeder extends Seeder
                 'role_id' => '1',
             ],
             [
-                'username' => 'stan_company_dispatcher',
                 'first_name' => 'Stan',
                 'last_name' => 'Test',
                 'email' => 'sunnystas2@gmail.com',
